@@ -1,8 +1,13 @@
 package com.example.proj_7;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +34,44 @@ public class MainActivity extends AppCompatActivity {
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
     }
+    /**
+     * onCreateOptionsMenu method
+     * <p> Creating the options menu
+     * </p>
+     *
+     * @param menu the Menu object to pass to the inflater
+     * @return true
+     */
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.tafrit, menu);
+        return true;
+    }
+    /**
+     * onOptionsItemSelected method
+     * <p> Reacting the options menu
+     * </p>
+     *
+     * @param item the MenuItem object that triggered by the listener
+     * @return super.onOptionsItemSelected(item)
+     */
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        String str = item.getTitle().toString();
+        if(str.equals("Main Activity")){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else if(str.equals("Credits Activity")){
+            Intent intent = new Intent(this, Credits_Activity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public void move_up(View view){
+        if(et.getText()!=null){
+            tv.setText(et.getText().toString());
+        }
+    }
+
     public void show_read(View view){
         String fileName = FILENAME.substring(0, FILENAME.length()-4);
         int resourceId = this.getResources().getIdentifier(fileName, "raw", this.getPackageName());
@@ -50,11 +93,6 @@ public class MainActivity extends AppCompatActivity {
         catch (IOException e){
             e.printStackTrace();
             Toast.makeText(this, "Failed to save text file", Toast.LENGTH_SHORT).show();
-        }
-    }
-    public void move_up(View view){
-        if(et.getText()!=null){
-            tv.setText(et.getText().toString());
         }
     }
 }
