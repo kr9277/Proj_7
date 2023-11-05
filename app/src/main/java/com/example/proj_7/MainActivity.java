@@ -18,12 +18,17 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+/** @author Created by karin on 2/11/2023.
+ * @version 1.0
+ * @since 5/11/2023
+ *On this Activity, there are two buttons, an edit text and a Text view, and a context menu which contains 2 options, stay on this screen or move to the credits screen.
+ */
 
 public class MainActivity extends AppCompatActivity {
     EditText et;
     TextView tv;
     Button btn1, btn2;
-    private final String FILENAME = "rawtest.txt";
+    private final String FILENAME = "rawtest.txt"; //The full file name
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +61,33 @@ public class MainActivity extends AppCompatActivity {
      */
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         String str = item.getTitle().toString();
-        if(str.equals("Main Activity")){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
-        else if(str.equals("Credits Activity")){
+        if(str.equals("Credits Activity")){
             Intent intent = new Intent(this, Credits_Activity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
+    /**
+     * move_up method
+     * <p> Reacting the first button
+     * </p>
+     *
+     * @param view the view that triggered the method
+     * The method is showing the input from the edit text in the text view
+     */
     public void move_up(View view){
         if(et.getText()!=null){
             tv.setText(et.getText().toString());
         }
     }
-
+    /**
+     * show_read method
+     * <p> Reacting the second button
+     * </p>
+     *
+     * @param view the view that triggered the method
+     * The method is reading the text from the text file & display
+     */
     public void show_read(View view){
         String fileName = FILENAME.substring(0, FILENAME.length()-4);
         int resourceId = this.getResources().getIdentifier(fileName, "raw", this.getPackageName());

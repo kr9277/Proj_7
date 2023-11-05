@@ -8,6 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+/** @author Created by karin on 2/11/2023.
+ * @version 1.0
+ * @since 5/11/2023
+ *On this Activity, there are two Text views, and a context menu which contains 2 options, stay on this screen or return to the main screen
+ */
 
 public class Credits_Activity extends AppCompatActivity {
     TextView tv1, tv2;
@@ -42,12 +47,7 @@ public class Credits_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         String str = item.getTitle().toString();
         if(str.equals("Main Activity")){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
-        else if(str.equals("Credits Activity")){
-            Intent intent = new Intent(this, Credits_Activity.class);
-            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
